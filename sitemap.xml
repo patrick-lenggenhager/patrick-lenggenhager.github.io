@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>/2020/02/14/OptimalRG.html</loc>
+<loc>http://localhost:4000/2020/02/14/OptimalRG.html</loc>
 <lastmod>2020-02-14T00:00:00+01:00</lastmod>
 </url>
 <url>
-<loc>/2020/08/06/NodalLinksInTPMs.html</loc>
+<loc>http://localhost:4000/2020/08/06/NodalLinksInTPMs.html</loc>
 <lastmod>2020-08-06T00:00:00+02:00</lastmod>
 </url>
 <url>
-<loc>/contact.html</loc>
+<loc>http://localhost:4000/contact.html</loc>
 </url>
 <url>
-<loc>/</loc>
+<loc>http://localhost:4000/</loc>
 </url>
 <url>
-<loc>/publications.html</loc>
+<loc>http://localhost:4000/publications.html</loc>
 </url>
 <url>
-<loc>/resint.html</loc>
+<loc>http://localhost:4000/resint.html</loc>
 </url>
 </urlset>
