@@ -69,6 +69,44 @@
 			
 				<a href="https://doi.org/10.3929/ethz-b-000503548" class="btn btn-primary btn-sm mb-4" target="_blank"><span class="">Data/Code</span></a>
 			
+			
+				<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-sm mb-4" data-toggle="modal" data-target="#exampleModal">
+  Cite
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <script src="/assets/js/cite.js"></script>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	<pre class="code-bibtex"><code id="textCitation">@article{Lenggenhager:2021c,
+  title             = {Electric-circuit realization of a hyperbolic drum}, 
+  author            = {Lenggenhager, Patrick M. and Stegmaier, Alexander and Upreti, Lavi K. and Hofmann, Tobias and Helbig, Tobias and Vollhardt, Achim and Greiter, Martin and Lee, Ching Hua and Imhof, Stefan and Brand, Hauke and Kie{\ss}ling, Tobias and Boettcher, Igor and Neupert, Titus and Thomale, Ronny and Bzdu\v{s}ek, Tom\'{a}\v{s}},
+  year              = {2021},
+  eprint            = {2109.01148},
+  eprintType        = {arxiv},
+  archivePrefix     = {arXiv},
+  journal           = {ArXiv preprint},
+  url               = {https://arxiv.org/abs/2109.01148}
+}
+</code></pre>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="copyCitation()">Copy</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+			
 			<h6 class="card-subtitle mb-3">P. M. Lenggenhager, A. Stegmaier, L. K. Upreti, T. Hofmann, T. Helbig, A. Vollhardt, M. Greiter, C. H. Lee, S. Imhof, H. Brand, T. Kießling, I. Boettcher, T. Neupert, R. Thomale, and T. Bzdušek</h6>
 			
 				<h6 class="card-subtitle mb-3">arXiv:2109.01148  &ndash; Uploaded 02 Sep 2021</h6>
