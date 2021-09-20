@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>/2020/02/14/OptimalRG.html</loc>
+<loc>/publications/2020/02/14/OptimalRG.html</loc>
 <lastmod>2020-02-14T00:00:00+01:00</lastmod>
 </url>
 <url>
-<loc>/2021/03/01/NodalLinksInTPMs.html</loc>
+<loc>/projects/2020/08/06/TriplePoints.html</loc>
+<lastmod>2020-08-06T00:00:00+02:00</lastmod>
+</url>
+<url>
+<loc>/publications/2021/03/01/NodalLinksInTPMs.html</loc>
 <lastmod>2021-03-01T00:00:00+01:00</lastmod>
 </url>
 <url>
-<loc>/2021/04/22/BulkHingeTPs.html</loc>
+<loc>/publications/2021/04/22/BulkHingeTPs.html</loc>
 <lastmod>2021-04-22T00:00:00+02:00</lastmod>
 </url>
 <url>
-<loc>/2021/09/02/HyperbolicDrum.html</loc>
+<loc>/publications/2021/09/02/HyperbolicDrum.html</loc>
 <lastmod>2021-09-02T00:00:00+02:00</lastmod>
 </url>
 <url>
@@ -21,6 +25,9 @@
 </url>
 <url>
 <loc>/</loc>
+</url>
+<url>
+<loc>/projects.html</loc>
 </url>
 <url>
 <loc>/publications.html</loc>
