@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+	<head>
+	<link href="http://gmpg.org/xfn/11" rel="profile">
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="google-site-verification" content="z6PptFpGBLy-ovj-9Xw1PXLnaYBOb8-dNpevc76Py_Y" />
+	
+	<script id="MathJax-script" defer
+		src="https://cdn.jsdelivr.net/npm/mathjax@3.0.0/es5/tex-mml-chtml.js">
+	</script>
+
+	<title>HyperCells and HyperBloch - Patrick M. Lenggenhager</title>
+
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/assets/academicons/css/academicons.min.css"/>
+	<script src="https://kit.fontawesome.com/1d410b0e3c.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+</head>
+
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #121254;">
+	<div class="container">
+		<a class="navbar-brand" href="/">Patrick M. Lenggenhager</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarResponsive">
+			<ul class="navbar-nav">
+				
+					<li class="nav-item">
+						<a class="nav-link" href="/">Home</a>
+					</li>
+				
+					<li class="nav-item">
+						<a class="nav-link" href="/resint.html">Research Interests</a>
+					</li>
+				
+					<li class="nav-item">
+						<a class="nav-link" href="/projects.html">Projects</a>
+					</li>
+				
+					<li class="nav-item">
+						<a class="nav-link" href="/publications.html">Publications</a>
+					</li>
+				
+					<li class="nav-item">
+						<a class="nav-link" href="/software.html">Software</a>
+					</li>
+				
+					<li class="nav-item">
+						<a class="nav-link" href="/contact.html">Contact</a>
+					</li>
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+
+			<div class="container" style="margin-top: 25px;">
+				<h3 class="mb-4">HyperCells and HyperBloch</h3>
+<h6 class="mb-3"><b>Authors:</b> P. M. Lenggenhager, J. Maciejko, and T. Bzdušek</h6>
+
+<img class="d-none d-lg-block float-left mr-2" width="25%" src="/assets/media/thumbnails/project_HyperbolicLattices.jpg">
+<img class="d-none d-md-block d-lg-none float-left mr-2" width="35%" src="/assets/media/thumbnails/project_HyperbolicLattices.jpg">
+<img class="d-none d-sm-block d-md-none float-left mr-2" width="45%" src="/assets/media/thumbnails/project_HyperbolicLattices.jpg">
+<img class="d-block d-sm-none mx-auto" width="100%" style="max-width:300px;" src="/assets/media/thumbnails/project_HyperbolicLattices.jpg">
+<p><p>Hyperbolic lattices were recently theoretically described by a non-Abelian generalization of the Bloch theorem, but practical approaches for efficient computations have remained missing. Our proposed “supercell method” overcomes the challenges posed by noncommuting translations, and enables significant progress towards an analytical description of hyperbolic lattice models in momentum space. To encourage further investigations in this emerging field, we have implemented the supercell method in a pair of complementary open-source software packages. The first package, HyperCells, is a GAP package for constructing the graphs underlying tight-binding models on infinite and compactified lattices. The second, HyperBloch, is a Mathematica package for constructing the corresponding Bloch Hamiltonian, its eigenstates, and spectrum.</p>
+
+<!--more-->
+
+<h4 id="supercell-method">Supercell Method</h4>
+
+<p>More specifically, we use computational group theory to create a sequence of progressively larger unit cells, each formed as a symmetric aggregate of smaller unit cells. Subsequently, we apply the previously established Abelian hyperbolic band theory — which ignores the noncommutativity of translations — to those growing supercells and obtain a converging description of the infinite lattice. The method was introduced in <a href="/publications/2023/12/01/Supercells.html">Phys. Rev. B 104, 115136 (2021)</a>. Practically, we need to perform the following steps:</p>
+<ol>
+  <li>construct the lattice and model graph on the primitive (unit) cell,</li>
+  <li>construct the supercell graph relating the model on the primitive cell to the model on the supercell,</li>
+  <li>set up the tight-binding model in real space on the primitive cell, and</li>
+  <li>construct the (Abelian) Bloch Hamiltonian.</li>
+</ol>
+
+<p>For an accessible introduction to the topic in general and these steps specifically, see my <a href="/publications/2023/09/29/PhDThesis.html">PhD thesis</a>.</p>
+
+<p>We provide implementations for the above steps in two complementary software packages, HyperCells (steps 1 and 2) and HyperBloch (steps 3 and 4), which are described in the following.
+If you are interested in using (one of) the packages, you might be interested in the <a href="/software/2024/01/10/HyperGuide.html" target="_blank">Getting Started guide</a>.</p>
+
+<h4 id="hypercells--">HyperCells <a href="https://github.com/patrick-lenggenhager/HyperCells" target="_blank"><i class="fa-brands fa-github"></i></a> <a href="https://patrick-lenggenhager.github.io/HyperCells/doc/chap0_mj.html" target="_blank"><i class="fa-solid fa-book"></i></a></h4>
+
+<p>HyperCells is a <a href="https://www.gap-system.org">GAP</a> package that aids in constructing primitive cells and supercells of hyperbolic lattices based on triangle groups and quotients with normal subgroups. For finite systems, this includes the construction of appropriate periodic boundary conditions, while for infinite systems, the corresponding primitive cell and successive supercells are constructed in order to apply the supercell method for hyperbolic band theory. Additionally, the package determines maximally-symmetric Wyckoff positions and simplifies dealing with translation and point group symmetries on the hyperbolic lattice. The package also allows the definition of the graph underlying a specific model, i.e., selecting specific Wyckoff positions, nearest or next-nearest neighbors etc.</p>
+
+<p>The output of the HyperCells package, i.e., the cell and model graphs can be read by any programming language, such that using the HyperBloch package is not strictly necessary. The <a href="https://patrick-lenggenhager.github.io/HyperCells/doc/chap7_mj.html#X8091CEE880E799B4" target="_blank">file format definitions</a> can be found in the <a href="https://patrick-lenggenhager.github.io/HyperCells/doc/chap0_mj.html" target="_blank">documentation</a>.</p>
+
+<h4 id="hyperbloch-">HyperBloch <a href="https://github.com/patrick-lenggenhager/HyperBloch" target="_blank"><i class="fa-brands fa-github"></i></a></h4>
+<p>HyperBloch is a Mathematica package that provides functions for importing and easily visualizing the clusters, supercells, and model graphs output by the HyperCells package. Additionally, it allows the user to easily define tight-binding models ontop of the model graph, by placing orbitals at vertices and defining hopping matrices on the graph edges. Finally, functions for constructing the Abelian Bloch Hamiltonian for the defined model are provided which allows studying eigenstates and eigenvalues.</p>
+
+<p>The package can be easily installed as a Wolfram paclet:</p>
+<pre><code class="language-Mathematica">PacletInstall["https://github.com/patrick-lenggenhager/HyperBloch/releases/download/v0.9.0/PatrickMLenggenhager__HyperBloch-0.9.0.paclet"]
+</code></pre>
+</p>
+<div style="clear:both;"></div>
+
+			</div>
+		<footer class="sticky-bottom" style="background-color: #121254;">
+	<div class="container">
+		<p class="m-0 copyright-text">Copyright &copy; 2024 Patrick M. Lenggenhager. Designed by Patrick M. Lenggenhager.</p>
+	</div>
+</footer>
+
+		<script src="/js/jquery-3.3.1.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+	</body>
+</html>
