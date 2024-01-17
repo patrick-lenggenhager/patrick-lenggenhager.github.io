@@ -18,6 +18,7 @@
 	<link rel="stylesheet" href="/assets/academicons/css/academicons.min.css"/>
 	<script src="https://kit.fontawesome.com/1d410b0e3c.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+	<link href="/css/prism.css" rel="stylesheet"/>
 </head>
 
 	<body>
@@ -83,7 +84,8 @@
 
 <p>For an accessible introduction to the topic in general and these steps specifically, see my <a href="/publications/2023/09/29/PhDThesis.html">PhD thesis</a>.</p>
 
-<p>We provide implementations for the above steps in two complementary software packages, HyperCells (steps 1 and 2) and HyperBloch (steps 3 and 4), which are described in the following.</p>
+<p>We provide implementations for the above steps in two complementary software packages, HyperCells (steps 1 and 2) and HyperBloch (steps 3 and 4), which are described in the following.
+If you are interested in using (one of) the packages, you might be interested in the <a href="/software/2024/01/10/HyperGuide.html" target="_blank">Getting Started guide</a>.</p>
 
 <h4 id="hypercells--">HyperCells <a href="https://github.com/patrick-lenggenhager/HyperCells" target="_blank"><i class="fa-brands fa-github"></i></a> <a href="https://patrick-lenggenhager.github.io/HyperCells/doc/chap0_mj.html" target="_blank"><i class="fa-solid fa-book"></i></a></h4>
 
@@ -93,10 +95,6 @@
 
 <h4 id="hyperbloch-">HyperBloch <a href="https://github.com/patrick-lenggenhager/HyperBloch" target="_blank"><i class="fa-brands fa-github"></i></a></h4>
 <p>HyperBloch is a Mathematica package that provides functions for importing and easily visualizing the clusters, supercells, and model graphs output by the HyperCells package. Additionally, it allows the user to easily define tight-binding models ontop of the model graph, by placing orbitals at vertices and defining hopping matrices on the graph edges. Finally, functions for constructing the Abelian Bloch Hamiltonian for the defined model are provided which allows studying eigenstates and eigenvalues.</p>
-
-<p>The package can be easily installed as a Wolfram paclet:</p>
-<pre><code class="language-Mathematica">PacletInstall["https://github.com/patrick-lenggenhager/HyperBloch/releases/download/v0.9.0/PatrickMLenggenhager__HyperBloch-0.9.0.paclet"]
-</code></pre>
 </p>
 <div style="clear:both;"></div>
 
