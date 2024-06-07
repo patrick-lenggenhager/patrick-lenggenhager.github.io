@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+	<head>
+	<link href="http://gmpg.org/xfn/11" rel="profile">
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="google-site-verification" content="z6PptFpGBLy-ovj-9Xw1PXLnaYBOb8-dNpevc76Py_Y" />
+	
+	<script id="MathJax-script" defer
+		src="https://cdn.jsdelivr.net/npm/mathjax@3.0.0/es5/tex-mml-chtml.js">
+	</script>
+
+	<title>Tutorial: Introduction to git and Github - Patrick M. Lenggenhager</title>
+
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/assets/academicons/css/academicons.min.css"/>
+	<script src="https://kit.fontawesome.com/1d410b0e3c.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+	<link href="/css/prism.css" rel="stylesheet"/>
+</head>
+
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #121254;">
+	<div class="container">
+		<a class="navbar-brand" href="/">Patrick M. Lenggenhager</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarResponsive">
+			<ul class="navbar-nav">
+				
+					<li class="nav-item">
+						<a class="nav-link" href="/">Home</a>
+					</li>
+				
+					<li class="nav-item">
+						<a class="nav-link" href="/resint.html">Research Interests</a>
+					</li>
+				
+					<li class="nav-item">
+						<a class="nav-link" href="/projects.html">Projects</a>
+					</li>
+				
+					<li class="nav-item">
+						<a class="nav-link" href="/publications.html">Publications</a>
+					</li>
+				
+					<li class="nav-item">
+						<a class="nav-link" href="/software.html">Software</a>
+					</li>
+				
+					<li class="nav-item">
+						<a class="nav-link" href="/tutorials.html">Tutorials</a>
+					</li>
+				
+					<li class="nav-item">
+						<a class="nav-link" href="/contact.html">Contact</a>
+					</li>
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+
+			<div class="container match-braces" style="margin-top: 25px;">
+				<h1 id="tutorial-introduction-to-git-and-github">Tutorial: Introduction to git and Github</h1>
+
+<h2 id="preparation">Preparation</h2>
+<h3 id="installing-and-configuring-git">Installing and configuring git</h3>
+
+<p>First install the git client on your machine (if it is not already installed).
+At first use, you need to configure your name and email address:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config <span class="nt">--global</span> user.name <span class="s2">"Your Name"</span>
+git config <span class="nt">--global</span> user.email <span class="s2">"name@domain.com"</span>
+</code></pre></div></div>
+
+<h3 id="ssh-keys">SSH keys</h3>
+
+<p>To avoid having to enter your password every time you interact with git, you can use SSH keys.</p>
+
+<h4 id="creating-a-new-ssh-key">Creating a new SSH key</h4>
+<p>To create a new SSH key, open a terminal and type:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh-keygen <span class="nt">-t</span> ed25519
+</code></pre></div></div>
+<p>You will be asked to enter a file in which to save the key.
+Press enter to use the default location.
+You will then be asked to enter a passphrase.</p>
+
+<h4 id="adding-the-ssh-key-to-your-github-account">Adding the SSH key to your Github account</h4>
+<p>To add the SSH key to your Github account, first copy the key to the clipboard. The key can be shown in the terminal by typing (if you used the default location):</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> ~/.ssh/id_ed25519.pub
+</code></pre></div></div>
+<p>Then go to your Github account settings, select “SSH and GPG keys” and click on “New SSH key”.
+Give it a name and paste the key into the “Key” field.</p>
+
+<h4 id="using-an-ssh-agent">Using an SSH agent</h4>
+<p>To avoid having to enter the passphrase every time you use the SSH key, you can use an SSH agent.
+To start the SSH agent, type:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">eval</span> <span class="s2">"</span><span class="si">$(</span>ssh-agent <span class="nt">-s</span><span class="si">)</span><span class="s2">"</span>
+</code></pre></div></div>
+<p>Then add the SSH key to the agent:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh-add ~/.ssh/id_ed25519
+</code></pre></div></div>
+
+<h2 id="initializing-a-repository">Initializing a repository</h2>
+
+<p>Git is a distributed version control system.
+This means that while there usually is a repository called a “remote” on a server, e.g., on Github,, every user has a local copy of the repository.</p>
+
+<h3 id="creating-a-new-repository">Creating a new repository</h3>
+
+<p>To create a new repository on Github, click on the “+” sign in the top right corner and select “New repository”.
+Give it a name and a description and click on “Create repository”.
+You will be redirected to the repository page.</p>
+
+<h3 id="cloning-a-repository">Cloning a repository</h3>
+
+<p>Copy the SSH link to the repository by clicking on the green “Code” button and selecting “SSH”.
+Then open a terminal and navigate to the directory where you want to clone the repository.
+Then type:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone &lt;SSH <span class="nb">link</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<h2 id="daily-workflow">Daily workflow</h2>
+
+<h3 id="pulling-changes">Pulling changes</h3>
+
+<p>Before starting to work on the code, you should always pull the latest changes from the repository to make sure that the local copy is up to date.
+To do so, navigate to the repository directory and type:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull
+</code></pre></div></div>
+
+<h3 id="making-changes">Making changes</h3>
+
+<p>After pulling the latest changes, you can start working on the code.
+Once you are done, you can check which files have been changed by typing:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git status
+</code></pre></div></div>
+<p>You can then add the files to the staging area by typing:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add &lt;file1&gt; &lt;file2&gt; ...
+</code></pre></div></div>
+<p>or add all changed files by typing:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add <span class="nb">.</span>
+</code></pre></div></div>
+<p>You can then commit the changes by typing:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git commit <span class="nt">-m</span> <span class="s2">"Commit message"</span>
+</code></pre></div></div>
+<p>where the commit message should be a short description of the changes you made.
+Finally, you can push the changes to the remote repository by typing:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push
+</code></pre></div></div>
+
+<p>It is recommended to make separate commits for separate changes and to make the commit messages as descriptive as possible.
+The following is one possible convention for commit messages:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;category&gt;: first thing; second thing
+</code></pre></div></div>
+<p>where <code class="language-plaintext highlighter-rouge">&lt;category&gt;</code> is one of the following:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">feat</code>: new feature</li>
+  <li><code class="language-plaintext highlighter-rouge">fix</code>: bug fix</li>
+  <li><code class="language-plaintext highlighter-rouge">refactor</code>: code refactoring</li>
+  <li><code class="language-plaintext highlighter-rouge">chore</code>: writing documentation, formatting, adding tests, cleaning useless code etc.</li>
+</ul>
+
+<p>The commit message should be written in the present tense and should not end with a period.</p>
+
+<h3 id="branches">Branches</h3>
+
+<p>Branches are useful to work on new features without affecting the main code.
+The main branch is usually called “main” or “master”.
+To create a new branch, type:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch &lt;branch name&gt;
+</code></pre></div></div>
+<p>You can then switch to the new branch by typing:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout &lt;branch name&gt;
+</code></pre></div></div>
+<p>You can check which branch you are currently on by typing:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch
+</code></pre></div></div>
+<p>You can then make changes to the code as described above.
+Once you are done, you can push the branch to the remote repository by typing:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push <span class="nt">-u</span> origin &lt;branch name&gt;
+</code></pre></div></div>
+
+<p>Again, there are some conventions for branch names:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;category&gt;/&lt;reference&gt;/&lt;branch name&gt;
+</code></pre></div></div>
+<p>where <code class="language-plaintext highlighter-rouge">&lt;category&gt;</code> is one of the following:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">feat</code>: new feature</li>
+  <li><code class="language-plaintext highlighter-rouge">bugfix</code>: bug fix</li>
+  <li><code class="language-plaintext highlighter-rouge">hotfix</code>: hot fix</li>
+  <li><code class="language-plaintext highlighter-rouge">test</code>: experimenting with new features</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">&lt;reference&gt;</code> is a reference to an issue or pull request (or <code class="language-plaintext highlighter-rouge">no-ref</code> if there is no reference), and <code class="language-plaintext highlighter-rouge">&lt;branch name&gt;</code> is a short description of the branch in lower case and spaces replaced by <code class="language-plaintext highlighter-rouge">-</code>.</p>
+
+<h3 id="merging-branches">Merging branches</h3>
+
+<p>Once you are done working on a branch, you can merge it into the master branch.
+To do so, first switch to the master branch by typing:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout master
+</code></pre></div></div>
+<p>You can then merge the branch into the master branch by typing:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git merge &lt;branch name&gt;
+</code></pre></div></div>
+
+<h3 id="conflicts">Conflicts</h3>
+
+<p>If you try to merge a branch into another and there are conflicts, you will be notified.
+You can then open the file that has conflicts and resolve them manually.
+Conflicts are marked by:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+...
+=======
+...
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; &lt;branch name&gt;
+</code></pre></div></div>
+<p>The part between <code class="language-plaintext highlighter-rouge">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code> and <code class="language-plaintext highlighter-rouge">=======</code> is the code in the current branch.
+The part between <code class="language-plaintext highlighter-rouge">=======</code> and <code class="language-plaintext highlighter-rouge">&gt;&gt;&gt;&gt;&gt;&gt;&gt; &lt;branch name&gt;</code> is the code in the other branch.
+You can then decide which code to keep and which to discard.
+Once you are done, you can add the file to the staging area by typing:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add &lt;file&gt;
+</code></pre></div></div>
+<p>You can then commit the changes by typing:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git commit <span class="nt">-m</span> <span class="s2">"Commit message"</span>
+</code></pre></div></div>
+
+			</div>
+		<footer class="sticky-bottom" style="background-color: #121254;">
+	<div class="container">
+		<p class="m-0 copyright-text">Copyright &copy; 2024 Patrick M. Lenggenhager. Designed by Patrick M. Lenggenhager.</p>
+	</div>
+</footer>
+
+		<script src="/js/jquery-3.3.1.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+        <script src="/js/prism.js"></script>
+	</body>
+</html>

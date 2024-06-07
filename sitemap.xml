@@ -45,6 +45,10 @@
 <lastmod>2023-09-29T00:00:00+02:00</lastmod>
 </url>
 <url>
+<loc>/tutorials/2023/10/08/Git-Intro.html</loc>
+<lastmod>2023-10-08T00:00:00+02:00</lastmod>
+</url>
+<url>
 <loc>/publications/2023/12/01/Supercells.html</loc>
 <lastmod>2023-12-01T00:00:00+01:00</lastmod>
 </url>
@@ -53,7 +57,7 @@
 <lastmod>2023-12-01T00:00:00+01:00</lastmod>
 </url>
 <url>
-<loc>/software/2024/01/10/HyperGuide.html</loc>
+<loc>/tutorials/2024/01/10/HyperGuide.html</loc>
 <lastmod>2024-01-10T00:00:00+01:00</lastmod>
 </url>
 <url>
@@ -77,6 +81,9 @@
 </url>
 <url>
 <loc>/software.html</loc>
+</url>
+<url>
+<loc>/tutorials.html</loc>
 </url>
 <url>
 <loc>/assets/misc/LenggenhagerPatrickM_CV.pdf</loc>
