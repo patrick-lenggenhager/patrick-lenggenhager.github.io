@@ -65,10 +65,20 @@
 </nav>
 
 			<div class="container match-braces" style="margin-top: 25px;">
-				<h1 id="tutorial-introduction-to-git-and-github">Tutorial: Introduction to git and Github</h1>
+				<h2 id="tutorial-introduction-to-git-and-github">Tutorial: Introduction to git and Github</h2>
 
-<h2 id="preparation">Preparation</h2>
-<h3 id="installing-and-configuring-git">Installing and configuring git</h3>
+<h3 id="table-of-contents">Table of Contents</h3>
+
+<ul>
+  <li><a href="#preparation">Preparation</a></li>
+  <li><a href="#initializing-a-repository">Initializing a repository</a></li>
+  <li><a href="#daily-workflow">Daily workflow</a></li>
+  <li><a href="#branches">Branches</a></li>
+  <li><a href="#advanced-tools">Advanced tools</a></li>
+</ul>
+
+<h3 id="preparation">Preparation</h3>
+<h4 id="installing-and-configuring-git">Installing and configuring git</h4>
 
 <p>First install the git client on your machine (if it is not already installed).
 At first use, you need to configure your name and email address:</p>
@@ -77,11 +87,11 @@ At first use, you need to configure your name and email address:</p>
 git config <span class="nt">--global</span> user.email <span class="s2">"name@domain.com"</span>
 </code></pre></div></div>
 
-<h3 id="ssh-keys">SSH keys</h3>
+<h4 id="ssh-keys">SSH keys</h4>
 
 <p>To avoid having to enter your password every time you interact with git, you can use SSH keys.</p>
 
-<h4 id="creating-a-new-ssh-key">Creating a new SSH key</h4>
+<h5 id="creating-a-new-ssh-key">Creating a new SSH key</h5>
 <p>To create a new SSH key, open a terminal and type:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh-keygen <span class="nt">-t</span> ed25519
 </code></pre></div></div>
@@ -89,14 +99,14 @@ git config <span class="nt">--global</span> user.email <span class="s2">"name@do
 Press enter to use the default location.
 You will then be asked to enter a passphrase.</p>
 
-<h4 id="adding-the-ssh-key-to-your-github-account">Adding the SSH key to your Github account</h4>
+<h5 id="adding-the-ssh-key-to-your-github-account">Adding the SSH key to your Github account</h5>
 <p>To add the SSH key to your Github account, first copy the key to the clipboard. The key can be shown in the terminal by typing (if you used the default location):</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> ~/.ssh/id_ed25519.pub
 </code></pre></div></div>
 <p>Then go to your Github account settings, select “SSH and GPG keys” and click on “New SSH key”.
 Give it a name and paste the key into the “Key” field.</p>
 
-<h4 id="using-an-ssh-agent">Using an SSH agent</h4>
+<h5 id="using-an-ssh-agent">Using an SSH agent</h5>
 <p>To avoid having to enter the passphrase every time you use the SSH key, you can use an SSH agent.
 To start the SSH agent, type:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">eval</span> <span class="s2">"</span><span class="si">$(</span>ssh-agent <span class="nt">-s</span><span class="si">)</span><span class="s2">"</span>
@@ -105,18 +115,18 @@ To start the SSH agent, type:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh-add ~/.ssh/id_ed25519
 </code></pre></div></div>
 
-<h2 id="initializing-a-repository">Initializing a repository</h2>
+<h3 id="initializing-a-repository">Initializing a repository</h3>
 
 <p>Git is a distributed version control system.
 This means that while there usually is a repository called a “remote” on a server, e.g., on Github,, every user has a local copy of the repository.</p>
 
-<h3 id="creating-a-new-repository">Creating a new repository</h3>
+<h4 id="creating-a-new-repository">Creating a new repository</h4>
 
 <p>To create a new repository on Github, click on the “+” sign in the top right corner and select “New repository”.
 Give it a name and a description and click on “Create repository”.
 You will be redirected to the repository page.</p>
 
-<h3 id="cloning-a-repository">Cloning a repository</h3>
+<h4 id="cloning-a-repository">Cloning a repository</h4>
 
 <p>Copy the SSH link to the repository by clicking on the green “Code” button and selecting “SSH”.
 Then open a terminal and navigate to the directory where you want to clone the repository.
@@ -124,16 +134,16 @@ Then type:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone &lt;SSH <span class="nb">link</span><span class="o">&gt;</span>
 </code></pre></div></div>
 
-<h2 id="daily-workflow">Daily workflow</h2>
+<h3 id="daily-workflow">Daily workflow</h3>
 
-<h3 id="pulling-changes">Pulling changes</h3>
+<h4 id="pulling-changes">Pulling changes</h4>
 
 <p>Before starting to work on the code, you should always pull the latest changes from the repository to make sure that the local copy is up to date.
 To do so, navigate to the repository directory and type:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull
 </code></pre></div></div>
 
-<h3 id="making-changes">Making changes</h3>
+<h4 id="making-changes">Making changes</h4>
 
 <p>After pulling the latest changes, you can start working on the code.
 Once you are done, you can check which files have been changed by typing:</p>
@@ -167,6 +177,22 @@ The following is one possible convention for commit messages:</p>
 
 <p>The commit message should be written in the present tense and should not end with a period.</p>
 
+<h4 id="gitignore">.gitignore</h4>
+
+<p>Often, there are files that you do not want to tracked by git.
+This includes, for example, temporary and binary files.
+To tell git to exclude certain files, the <code class="language-plaintext highlighter-rouge">.gitignore</code> file can be used.
+This is usually placed in the root of the repository, but can also be placed in specific subdirectories, in which case it only applies there.
+Specific files or directories are ignored by listing their names or paths in <code class="language-plaintext highlighter-rouge">.gitignore</code>; glob patterns can be used, leading to content like</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*.&lt;extension&gt;
+&lt;subdirectory&gt;
+&lt;subdirectory 2&gt;/&lt;filename&gt;
+</code></pre></div></div>
+
+<p>It can be useful to add the <code class="language-plaintext highlighter-rouge">.gitignore</code> file to the repository as well, such that the same rules apply in each clone:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add .gitignore
+</code></pre></div></div>
+
 <h3 id="branches">Branches</h3>
 
 <p>Branches are useful to work on new features without affecting the main code.
@@ -198,7 +224,7 @@ Once you are done, you can push the branch to the remote repository by typing:</
 
 <p><code class="language-plaintext highlighter-rouge">&lt;reference&gt;</code> is a reference to an issue or pull request (or <code class="language-plaintext highlighter-rouge">no-ref</code> if there is no reference), and <code class="language-plaintext highlighter-rouge">&lt;branch name&gt;</code> is a short description of the branch in lower case and spaces replaced by <code class="language-plaintext highlighter-rouge">-</code>.</p>
 
-<h3 id="merging-branches">Merging branches</h3>
+<h4 id="merging-branches">Merging branches</h4>
 
 <p>Once you are done working on a branch, you can merge it into the master branch.
 To do so, first switch to the master branch by typing:</p>
@@ -208,7 +234,7 @@ To do so, first switch to the master branch by typing:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git merge &lt;branch name&gt;
 </code></pre></div></div>
 
-<h3 id="conflicts">Conflicts</h3>
+<h4 id="conflicts">Conflicts</h4>
 
 <p>If you try to merge a branch into another and there are conflicts, you will be notified.
 You can then open the file that has conflicts and resolve them manually.
@@ -219,8 +245,8 @@ Conflicts are marked by:</p>
 ...
 &gt;&gt;&gt;&gt;&gt;&gt;&gt; &lt;branch name&gt;
 </code></pre></div></div>
-<p>The part between <code class="language-plaintext highlighter-rouge">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code> and <code class="language-plaintext highlighter-rouge">=======</code> is the code in the current branch.
-The part between <code class="language-plaintext highlighter-rouge">=======</code> and <code class="language-plaintext highlighter-rouge">&gt;&gt;&gt;&gt;&gt;&gt;&gt; &lt;branch name&gt;</code> is the code in the other branch.
+<p>The part between <code class="language-plaintext highlighter-rouge">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code> and <code class="language-plaintext highlighter-rouge">=======</code> is the code in the current branch, more precisely in the workspace.
+The part between <code class="language-plaintext highlighter-rouge">=======</code> and <code class="language-plaintext highlighter-rouge">&gt;&gt;&gt;&gt;&gt;&gt;&gt; &lt;branch name&gt;</code> is the code in the other (“incoming”) branch.
 You can then decide which code to keep and which to discard.
 Once you are done, you can add the file to the staging area by typing:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add &lt;file&gt;
@@ -228,6 +254,77 @@ Once you are done, you can add the file to the staging area by typing:</p>
 <p>You can then commit the changes by typing:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git commit <span class="nt">-m</span> <span class="s2">"Commit message"</span>
 </code></pre></div></div>
+
+<h3 id="advanced-tools">Advanced tools</h3>
+
+<p>This is just a selection and overview over some more advanced topics.</p>
+
+<h4 id="large-file-storage-lfs">Large file storage (LFS)</h4>
+
+<p>If you are regularly working with large or binary files that you still need to be versioned, including them in the repository can lead to problems such as exceeding server limits and slow cloning/fetching.
+A possible solutio is to use <a href="https://git-lfs.com/">git large file storage (LFS)</a> which stores the (versions of the) files separately and replaces them with links in the actual repository, thus getting the best from both worlds.
+To set up git lfs for a new user, type</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git lfs <span class="nb">install</span>
+</code></pre></div></div>
+
+<p>In the repository, files can be specified to be tracked by git lfs using</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git lfs track &lt;file/pattern&gt;
+</code></pre></div></div>
+<p>This will add/modify the file <code class="language-plaintext highlighter-rouge">.gitattributes</code> which it might again be useful to add to the repository</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add .gitattributes
+</code></pre></div></div>
+<p>In case LFS is set up for a repository with existing versioned files that should be tracked by LFS instead, they can be migrated (after specifying the rules)</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git lfs migrate
+</code></pre></div></div>
+
+<h4 id="github-actions">Github Actions</h4>
+
+<p>Github Actions can be used to automatically run commands on the server, e.g., to build, test, deploy etc.
+The corresponding “workflows” are set up using YAML files in <code class="language-plaintext highlighter-rouge">.github/workflows/</code>.
+A simple example might have the following structure</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">&lt;name&gt;</span>
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">&lt;branch name&gt;</span>
+      <span class="pi">-</span> <span class="s">&lt;branch pattern&gt;</span>
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">build</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">&lt;platform&gt;</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v4</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">&lt;name of the step&gt;</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">&lt;command&gt;</span>
+</code></pre></div></div>
+<p>where the line <code class="language-plaintext highlighter-rouge">uses: actions/checkout@v4</code> calls an action from the library, in this case one that checks out the repository such that all the files are actually available.</p>
+
+<p>For example, to test the python script <code class="language-plaintext highlighter-rouge">app.py</code> using pytest on several Python versions whenever something is pushed to the <code class="language-plaintext highlighter-rouge">master</code> branch:</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Python test</span>
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">master</span>
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">build</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">strategy</span><span class="pi">:</span>
+      <span class="na">matrix</span><span class="pi">:</span>
+        <span class="na">python-version</span><span class="pi">:</span> <span class="pi">[</span> <span class="s2">"</span><span class="s">3.10"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">3.11"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">3.12"</span> <span class="pi">]</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v4</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up Python $</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-python@v5</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">python-version</span><span class="pi">:</span> <span class="s">$</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install dependencies</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">python -m pip install --upgrade pip</span>
+          <span class="s">python -m pip install pytest</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Test with pytests</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">pytest app.py</span>
+</code></pre></div></div>
+<p>For more details, check the <a href="https://docs.github.com/en/actions">documentation.</a></p>
 
 			</div>
 		<footer class="sticky-bottom" style="background-color: #121254;">
