@@ -81,12 +81,12 @@
 <p>The task of modeling tight-binding models on hyperbolic lattices is split into two steps:</p>
 <ol>
   <li><strong>Constructing the lattice/model graph</strong>
- For finite systems, this includes the construction of appropriate periodic boundary conditions, while for infinite systems, the corresponding primitive cell and successive supercells are constructed in order to apply the supercell method for hyperbolic band theory. This part is implemented in the <a href="https://www.gap-system.org" target="_blank">GAP</a> package <a href="https://github.com/patrick-lenggenhager/HyperCells" target="_blank">HyperCells</a>. Additionally, the package determines maximally-symmetric Wyckoff positions and simplifies dealing with translation and point group symmetries on the hyperbolic lattice. The package also allows the definition of the graph underlying a specific model, i.e., selecting specific Wyckoff positions, nearest or next-nearest neighbors etc.</li>
+ For finite systems, this includes the construction of appropriate periodic boundary conditions, while for infinite systems, the corresponding primitive cell and successive supercells are constructed in order to apply the supercell method for hyperbolic band theory. This part is implemented in the <a href="https://www.gap-system.org" target="_blank">GAP</a> package <a href="https://github.com/HyperCells/HyperCells" target="_blank">HyperCells</a>. Additionally, the package determines maximally-symmetric Wyckoff positions and simplifies dealing with translation and point group symmetries on the hyperbolic lattice. The package also allows the definition of the graph underlying a specific model, i.e., selecting specific Wyckoff positions, nearest or next-nearest neighbors etc.</li>
   <li><strong>Defining tight-binding models and using hyperbolic band theory</strong>
- The second package, a Mathematica package called <a href="https://github.com/patrick-lenggenhager/HyperBloch" target="_blank">HyperBloch</a> provides functions for importing and easily visualizing the clusters, supercells, and model graphs. Additionally, it allows the user to easily define tight-binding models ontop of the model graph, by placing orbitals at vertices and definining hopping matrices on the edges. Finally, the Abelian Bloch Hamiltonian for the defined model is constructed and thus allows to study eigenstates and eigenvalues.</li>
+ The second package, a Mathematica package called <a href="https://github.com/HyperCells/HyperBloch" target="_blank">HyperBloch</a> provides functions for importing and easily visualizing the clusters, supercells, and model graphs. Additionally, it allows the user to easily define tight-binding models ontop of the model graph, by placing orbitals at vertices and definining hopping matrices on the edges. Finally, the Abelian Bloch Hamiltonian for the defined model is constructed and thus allows to study eigenstates and eigenvalues.</li>
 </ol>
 
-<p>Note that the output of the HyperCells package, i.e., the cell and model graphs can be read by any programming language, such that using the HyperBloch package is not strictly necessary. The <a href="https://patrick-lenggenhager.github.io/HyperCells/doc/chap7_mj.html#X8091CEE880E799B4" target="_blank">file format definitions</a> can be found in the <a href="https://patrick-lenggenhager.github.io/HyperCells/doc/chap0_mj.html" target="_blank">documentation</a>.</p>
+<p>Note that the output of the HyperCells package, i.e., the cell and model graphs can be read by any programming language, such that using the HyperBloch package is not strictly necessary. The <a href="https://hypercells.github.io/HyperCells/doc/chap7_mj.html#X8091CEE880E799B4" target="_blank">file format definitions</a> can be found in the <a href="https://hypercells.github.io/HyperCells/doc/chap0_mj.html" target="_blank">documentation</a>.</p>
 
 <h4 id="supercell-method">Supercell Method</h4>
 
@@ -129,7 +129,7 @@ make
 <p>The HyperCells package is most easily installed by simply cloning the git repository in the user’s GAP package directory:</p>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> ~/.gap/pkg
 <span class="nb">cd</span> ~/.gap/pkg
-git clone https://github.com/patrick-lenggenhager/HyperCells.git
+git clone https://github.com/HyperCells/HyperCells.git
 </code></pre></div></div>
 <p>To update it to the most recent version, simply pull:</p>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~/.gap/pkg/HyperCells
@@ -148,9 +148,9 @@ git pull
 <pre><code class="language-Mathematica">PacletInstall["https://github.com/NCAlgebra/NC/blob/master/NCAlgebra-6.0.3.paclet?raw=true"];
 </code></pre>
 <p>and then the package itself as a paclet:</p>
-<pre><code class="language-Mathematica">PacletInstall["https://github.com/patrick-lenggenhager/HyperBloch/releases/download/v0.9.0/PatrickMLenggenhager__HyperBloch-0.9.0.paclet"]
+<pre><code class="language-Mathematica">PacletInstall["https://github.com/HyperCells/HyperBloch/releases/download/v0.9.0/PatrickMLenggenhager__HyperBloch-0.9.0.paclet"]
 </code></pre>
-<p>If necessary, update the version number to match the one of the <a href="https://github.com/patrick-lenggenhager/HyperBloch/releases/latest" target="_blank">latest release</a>. Alternatively, download the release file manually, and install it with <code class="language-Mathematica">PacletInstall["path"]</code> by passing the path to the downloaded file as argument.</p>
+<p>If necessary, update the version number to match the one of the <a href="https://github.com/HyperCells/HyperBloch/releases/latest" target="_blank">latest release</a>. Alternatively, download the release file manually, and install it with <code class="language-Mathematica">PacletInstall["path"]</code> by passing the path to the downloaded file as argument.</p>
 
 <h3 id="getting-started">Getting Started</h3>
 
@@ -159,7 +159,7 @@ git pull
 <p>To use the package, start gap and then load the package with</p>
 <pre><code class="language-gap">gap&gt; LoadPackage("HyperCells");
 </code></pre>
-<p>A <a href="https://patrick-lenggenhager.github.io/HyperCells/doc/chap1_mj.html#X85861B017AEEC50B" target="_blank">basic example</a> including explanations can be found in the <a href="https://patrick-lenggenhager.github.io/HyperCells/doc/chap0_mj.html" target="_blank">documentation</a>, while more complicated examples, reproducing all our results from the paper can be found in the <a href="https://zenodo.org/records/10142168" target="_blank">Supplementary Data and Code</a>.</p>
+<p>A <a href="https://hypercells.github.io/HyperCells/doc/chap1_mj.html#X85861B017AEEC50B" target="_blank">basic example</a> including explanations can be found in the <a href="https://hypercells.github.io/HyperCells/doc/chap0_mj.html" target="_blank">documentation</a>, while more complicated examples, reproducing all our results from the paper can be found in the <a href="https://zenodo.org/records/10142168" target="_blank">Supplementary Data and Code</a>.</p>
 
 <h5 id="hyperbloch-1">HyperBloch</h5>
 

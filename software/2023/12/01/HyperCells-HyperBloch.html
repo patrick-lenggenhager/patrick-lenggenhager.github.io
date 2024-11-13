@@ -78,7 +78,7 @@
 
 <h4 id="supercell-method">Supercell Method</h4>
 
-<p>More specifically, we use computational group theory to create a sequence of progressively larger unit cells, each formed as a symmetric aggregate of smaller unit cells. Subsequently, we apply the previously established Abelian hyperbolic band theory — which ignores the noncommutativity of translations — to those growing supercells and obtain a converging description of the infinite lattice. The method was introduced in <a href="/publications/2023/12/01/Supercells.html">Phys. Rev. B 104, 115136 (2021)</a>. Practically, we need to perform the following steps:</p>
+<p>More specifically, we use computational group theory to create a sequence of progressively larger unit cells, each formed as a symmetric aggregate of smaller unit cells. Subsequently, we apply the previously established Abelian hyperbolic band theory — which ignores the noncommutativity of translations — to those growing supercells and obtain a converging description of the infinite lattice. The method was introduced in <a href="/publications/2023/12/01/Supercells.html">Phys. Rev. Lett. <strong>131</strong>, 226401</a>. Practically, we need to perform the following steps:</p>
 <ol>
   <li>construct the lattice and model graph on the primitive (unit) cell,</li>
   <li>construct the supercell graph relating the model on the primitive cell to the model on the supercell,</li>
@@ -91,13 +91,13 @@
 <p>We provide implementations for the above steps in two complementary software packages, HyperCells (steps 1 and 2) and HyperBloch (steps 3 and 4), which are described in the following.
 If you are interested in using (one of) the packages, you might be interested in the <a href="/tutorials/2024/01/10/HyperGuide.html" target="_blank">Getting Started guide</a>.</p>
 
-<h4 id="hypercells--">HyperCells <a href="https://github.com/patrick-lenggenhager/HyperCells" target="_blank"><i class="fa-brands fa-github"></i></a> <a href="https://patrick-lenggenhager.github.io/HyperCells/doc/chap0_mj.html" target="_blank"><i class="fa-solid fa-book"></i></a></h4>
+<h4 id="hypercells--">HyperCells <a href="https://github.com/HyperCells/HyperCells" target="_blank"><i class="fa-brands fa-github"></i></a> <a href="https://hypercells.github.io/HyperCells/doc/chap0_mj.html" target="_blank"><i class="fa-solid fa-book"></i></a></h4>
 
 <p>HyperCells is a <a href="https://www.gap-system.org">GAP</a> package that aids in constructing primitive cells and supercells of hyperbolic lattices based on triangle groups and quotients with normal subgroups. For finite systems, this includes the construction of appropriate periodic boundary conditions, while for infinite systems, the corresponding primitive cell and successive supercells are constructed in order to apply the supercell method for hyperbolic band theory. Additionally, the package determines maximally-symmetric Wyckoff positions and simplifies dealing with translation and point group symmetries on the hyperbolic lattice. The package also allows the definition of the graph underlying a specific model, i.e., selecting specific Wyckoff positions, nearest or next-nearest neighbors etc.</p>
 
-<p>The output of the HyperCells package, i.e., the cell and model graphs can be read by any programming language, such that using the HyperBloch package is not strictly necessary. The <a href="https://patrick-lenggenhager.github.io/HyperCells/doc/chap7_mj.html#X8091CEE880E799B4" target="_blank">file format definitions</a> can be found in the <a href="https://patrick-lenggenhager.github.io/HyperCells/doc/chap0_mj.html" target="_blank">documentation</a>.</p>
+<p>The output of the HyperCells package, i.e., the cell and model graphs can be read by any programming language, such that using the HyperBloch package is not strictly necessary. The <a href="https://hypercells.github.io/HyperCells/doc/chap7_mj.html#X8091CEE880E799B4" target="_blank">file format definitions</a> can be found in the <a href="https://hypercells.github.io/HyperCells/doc/chap0_mj.html" target="_blank">documentation</a>.</p>
 
-<h4 id="hyperbloch-">HyperBloch <a href="https://github.com/patrick-lenggenhager/HyperBloch" target="_blank"><i class="fa-brands fa-github"></i></a></h4>
+<h4 id="hyperbloch-">HyperBloch <a href="https://github.com/HyperCells/HyperBloch" target="_blank"><i class="fa-brands fa-github"></i></a></h4>
 <p>HyperBloch is a Mathematica package that provides functions for importing and easily visualizing the clusters, supercells, and model graphs output by the HyperCells package. Additionally, it allows the user to easily define tight-binding models ontop of the model graph, by placing orbitals at vertices and defining hopping matrices on the graph edges. Finally, functions for constructing the Abelian Bloch Hamiltonian for the defined model are provided which allows studying eigenstates and eigenvalues.</p>
 </p>
 <div style="clear:both;"></div>
