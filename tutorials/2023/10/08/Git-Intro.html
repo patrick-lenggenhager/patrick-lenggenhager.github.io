@@ -70,11 +70,49 @@
 <h3 id="table-of-contents">Table of Contents</h3>
 
 <ul>
-  <li><a href="#preparation">Preparation</a></li>
-  <li><a href="#initializing-a-repository">Initializing a repository</a></li>
-  <li><a href="#daily-workflow">Daily workflow</a></li>
-  <li><a href="#branches">Branches</a></li>
-  <li><a href="#advanced-tools">Advanced tools</a></li>
+  <li><a href="#tutorial-introduction-to-git-and-github">Tutorial: Introduction to git and Github</a>
+    <ul>
+      <li><a href="#table-of-contents">Table of Contents</a></li>
+      <li><a href="#preparation">Preparation</a>
+        <ul>
+          <li><a href="#installing-and-configuring-git">Installing and configuring git</a></li>
+          <li><a href="#ssh-keys">SSH keys</a>
+            <ul>
+              <li><a href="#creating-a-new-ssh-key">Creating a new SSH key</a></li>
+              <li><a href="#adding-the-ssh-key-to-your-github-account">Adding the SSH key to your Github account</a></li>
+              <li><a href="#using-an-ssh-agent">Using an SSH agent</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#initializing-a-repository">Initializing a repository</a>
+        <ul>
+          <li><a href="#creating-a-new-repository">Creating a new repository</a></li>
+          <li><a href="#cloning-a-repository">Cloning a repository</a></li>
+        </ul>
+      </li>
+      <li><a href="#daily-workflow">Daily workflow</a>
+        <ul>
+          <li><a href="#pulling-changes">Pulling changes</a></li>
+          <li><a href="#making-changes">Making changes</a></li>
+          <li><a href="#gitignore">.gitignore</a></li>
+        </ul>
+      </li>
+      <li><a href="#branches">Branches</a>
+        <ul>
+          <li><a href="#merging-branches">Merging branches</a></li>
+          <li><a href="#conflicts">Conflicts</a></li>
+        </ul>
+      </li>
+      <li><a href="#backup">Backup</a></li>
+      <li><a href="#advanced-tools">Advanced tools</a>
+        <ul>
+          <li><a href="#large-file-storage-lfs">Large file storage (LFS)</a></li>
+          <li><a href="#github-actions">Github Actions</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
 </ul>
 
 <h3 id="preparation">Preparation</h3>
@@ -254,6 +292,79 @@ Once you are done, you can add the file to the staging area by typing:</p>
 <p>You can then commit the changes by typing:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git commit <span class="nt">-m</span> <span class="s2">"Commit message"</span>
 </code></pre></div></div>
+
+<h3 id="backup">Backup</h3>
+<p>Git is not a backup system! Please follow proper backup procedures to make sure that your data is safe.
+A simple and convenient way to do so is to clone the repository using the <code class="language-plaintext highlighter-rouge">--mirror</code> option (see <a href="https://git-scm.com/docs/git-clone#Documentation/git-clone.txt-code--mirrorcode">documentation</a>) which takes care that a total copy is produced and subsequently create a git “bundle” file:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone <span class="nt">--mirror</span> &lt;repository URL&gt;
+<span class="nb">cd</span> &lt;repository name&gt;.git
+git bundle create &lt;filename&gt;.bundle <span class="nt">--all</span>
+</code></pre></div></div>
+
+<p>This will create a file <code class="language-plaintext highlighter-rouge">&lt;filename&gt;.bundle</code> that contains all the refs and commits reachable from those refs (typically what you need, but be careful, some things are not included, e.g., working tree, stash, hooks, etc.).
+You should then copy this file to multiple safe locations (e.g., an external hard drive or a cloud storage service).
+If you are running these commands on a PKS computer, it will likely be configured for automatic backups, which should take care of this at least partially.
+If you are using a cloud service, make sure that the file is not publicly accessible and that it is encrypted if necessary.</p>
+
+<p>You could use a script that automates the process of creating a backup bundle with the repository name and a timestamp as filename:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c"># Author: Patrick M. Lenggenhager</span>
+<span class="c"># Date: 2025-05-09</span>
+
+<span class="c"># Check if repository URL is provided</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+  </span><span class="nb">echo</span> <span class="s2">"Usage: </span><span class="nv">$0</span><span class="s2"> &lt;repository-url&gt;"</span>
+  <span class="nb">exit </span>1
+<span class="k">fi</span>
+
+<span class="c"># Set variables</span>
+<span class="nv">REPO_URL</span><span class="o">=</span><span class="nv">$1</span>
+<span class="nv">DATE</span><span class="o">=</span><span class="si">$(</span><span class="nb">date</span> +<span class="s2">"%Y%m%d%H%M%S"</span><span class="si">)</span>
+<span class="nv">REPO_NAME</span><span class="o">=</span><span class="si">$(</span><span class="nb">basename</span> <span class="nt">-s</span> .git <span class="s2">"</span><span class="nv">$REPO_URL</span><span class="s2">"</span><span class="si">)</span>
+<span class="nv">TEMP_DIR</span><span class="o">=</span><span class="s2">"/tmp/</span><span class="k">${</span><span class="nv">REPO_NAME</span><span class="k">}</span><span class="s2">_backup_</span><span class="nv">$DATE</span><span class="s2">"</span>
+<span class="nv">BUNDLE_NAME</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">REPO_NAME</span><span class="k">}</span><span class="s2">_backup_</span><span class="nv">$DATE</span><span class="s2">.bundle"</span>
+
+<span class="c"># Store the current working directory to move the bundle back later</span>
+<span class="nv">WORKING_DIR</span><span class="o">=</span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>
+
+<span class="c"># Clone the repository as a mirror</span>
+<span class="nb">echo</span> <span class="s2">"Cloning repository from </span><span class="nv">$REPO_URL</span><span class="s2">..."</span>
+git clone <span class="nt">--mirror</span> <span class="s2">"</span><span class="nv">$REPO_URL</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$TEMP_DIR</span><span class="s2">"</span>
+
+<span class="c"># Check if clone was successful</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> <span class="nt">-ne</span> 0 <span class="o">]</span><span class="p">;</span> <span class="k">then
+  </span><span class="nb">echo</span> <span class="s2">"Failed to clone repository."</span>
+  <span class="nb">exit </span>1
+<span class="k">fi</span>
+
+<span class="c"># Create the bundle</span>
+<span class="nb">echo</span> <span class="s2">"Creating bundle file </span><span class="nv">$BUNDLE_NAME</span><span class="s2">..."</span>
+<span class="nb">cd</span> <span class="s2">"</span><span class="nv">$TEMP_DIR</span><span class="s2">"</span>
+git bundle create <span class="s2">"</span><span class="nv">$BUNDLE_NAME</span><span class="s2">"</span> <span class="nt">--all</span>
+
+<span class="c"># Move the bundle to the original working directory</span>
+<span class="nb">mv</span> <span class="s2">"</span><span class="nv">$BUNDLE_NAME</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$WORKING_DIR</span><span class="s2">"</span>
+
+<span class="c"># Cleanup: delete the temporary cloned repository</span>
+<span class="nb">echo</span> <span class="s2">"Cleaning up temporary clone..."</span>
+<span class="nb">cd</span> ..
+<span class="nb">rm</span> <span class="nt">-rf</span> <span class="s2">"</span><span class="nv">$TEMP_DIR</span><span class="s2">"</span>
+
+<span class="nb">echo</span> <span class="s2">"Backup bundle created: </span><span class="nv">$WORKING_DIR</span><span class="s2">/</span><span class="nv">$BUNDLE_NAME</span><span class="s2">"</span>
+</code></pre></div></div>
+<p>which can be executed as follows:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./backup_repo.sh &lt;repository URL&gt;
+</code></pre></div></div>
+<p>This will create a file <code class="language-plaintext highlighter-rouge">&lt;repository name&gt;_backup_&lt;timestamp&gt;.bundle</code> in the current directory.
+Please check the script before using it and use it at your own risk, as I have not extensively tested it.</p>
+
+<p>To restore the repository from the bundle, you can use</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone &lt;filename&gt;.bundle &lt;repository name&gt;
+</code></pre></div></div>
+<p>This will create a new directory <code class="language-plaintext highlighter-rouge">&lt;repository name&gt;</code> with the contents of the bundle.
+You can even push this to a new remote repository if the original one is lost or not accessible anymore.</p>
+
+<p>As always, make sure to test the procedure before relying on it!</p>
 
 <h3 id="advanced-tools">Advanced tools</h3>
 
